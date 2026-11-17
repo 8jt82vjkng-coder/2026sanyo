@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>2026 山陽親子賞楓自駕遊 🍁</title>
+
+  <!-- PWA / iOS 加入主畫面設定 (單一檔案內嵌 SVG 圖示與 Manifest) -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="山陽親子遊" />
+  <meta name="theme-color" content="#FFFCF6" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%23FFFCF6'/%3E%3Crect x='8' y='8' width='164' height='164' rx='32' fill='%23F6D27A' stroke='%233E3A39' stroke-width='8'/%3E%3Crect x='46' y='52' width='14' height='84' rx='4' fill='%23F2A497' stroke='%233E3A39' stroke-width='6'/%3E%3Crect x='120' y='52' width='14' height='84' rx='4' fill='%23F2A497' stroke='%233E3A39' stroke-width='6'/%3E%3Crect x='30' y='76' width='120' height='12' rx='6' fill='%23F2A497' stroke='%233E3A39' stroke-width='6'/%3E%3Cpath d='M22 48 Q90 60 158 48 L153 62 Q90 71 27 62 Z' fill='%23F2A497' stroke='%233E3A39' stroke-width='6' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="manifest" href="data:application/manifest+json;utf8,%7B%22name%22%3A%222026%20%E5%B1%B1%E9%99%BD%E8%A6%AA%E5%AD%90%E8%B3%9E%E6%A5%93%E8%87%AA%E9%A7%95%E9%81%8A%22%2C%22short_name%22%3A%22%E5%B1%B1%E9%99%BD%E8%A6%AA%E5%AD%90%E9%81%8A%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23FFFCF6%22%2C%22theme_color%22%3A%22%23FFFCF6%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Butf8%2C%253Csvg%2520xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%2520viewBox%3D%270%200%20180%20180%27%253E%253Crect%2520width%3D%27180%27%2520height%3D%27180%27%2520rx%3D%2738%27%2520fill%3D%27%2523F6D27A%27%2F%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22180x180%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D" />
+
+  <!-- Google Fonts「Huninn (粉圓體)」 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Huninn&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* ==========================================================================
+       日系繪本風設計規範 (和紙白 #FFFCF6 + 3px 墨灰粗框 #3E3A39 + 平塗無漸層)
+       ========================================================================== */
+    :root {
+      --washi: #FFFCF6;
+      --ink: #3E3A39;
+      --coral: #F2A497;
+      --yamabuki: #F6D27A;
+      --mizu: #A8D3E6;
+      --wakatake: #B9DAA5;
+      --paper-pure: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Huninn', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: var(--washi);
+      color: var(--ink);
+    }
+
+    body {
+      background-color: var(--washi);
+      color: var(--ink);
+      margin: 0;
+      padding-bottom: 88px;
+      overflow-x: hidden;
+    }
+
+    /* 繪本粗框卡片與硬邊陰影 (嚴禁漸層) */
+    .ehon-card {
+      background-color: var(--paper-pure);
+      border: 3px solid var(--ink);
+      border-radius: 22px;
+      box-shadow: 4px 4px 0px var(--ink);
+    }
+
+    .ehon-card-washi {
+      background-color: var(--washi);
+      border: 3px solid var(--ink);
+      border-radius: 20px;
+      box-shadow: 3px 3px 0px var(--ink);
+    }
+
+    .ehon-btn {
+      border: 3px solid var(--ink);
+      border-radius: 9999px;
+      box-shadow: 2px 3px 0px var(--ink);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .ehon-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 0px 0px 0px var(--ink);
+    }
+
+    /* 配色平塗類別 */
+    .bg-washi { background-color: var(--washi); }
+    .bg-coral { background-color: var(--coral); }
+    .bg-yamabuki { background-color: var(--yamabuki); }
+    .bg-mizu { background-color: var(--mizu); }
+    .bg-wakatake { background-color: var(--wakatake); }
+    .text-ink { color: var(--ink); }
+    .border-ink { border-color: var(--ink); }
+
+    /* 隱藏橫向捲軸 */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* ==========================================================================
+       繪本微動畫 (插圖輕柔漂浮搖曳 + 日期頁籤彈跳)
+       ========================================================================== */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+    }
+
+    @keyframes swayLeaf {
+      0%, 100% { transform: rotate(-4deg) translateY(0px); }
+      50% { transform: rotate(4deg) translateY(-2px); }
+    }
+
+    @keyframes willowSway {
+      0%, 100% { transform: rotate(-2.5deg); }
+      50% { transform: rotate(2.5deg); }
+    }
+
+    @keyframes carPutt {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-2px); }
+    }
+
+    @keyframes rabbitHop {
+      0%, 80%, 100% { transform: translateY(0px); }
+      90% { transform: translateY(-5px); }
+    }
+
+    @keyframes springBounce {
+      0% { transform: scale(0.9); }
+      55% { transform: scale(1.08); }
+      80% { transform: scale(0.97); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes panelReveal {
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .anim-float { animation: floatSlow 3.6s ease-in-out infinite; }
+    .anim-leaf { animation: swayLeaf 3.2s ease-in-out infinite; transform-origin: center; }
+    .anim-willow { animation: willowSway 3.5s ease-in-out infinite; transform-origin: top center; }
+    .anim-car { animation: carPutt 1.6s ease-in-out infinite; }
+    .anim-rabbit { animation: rabbitHop 4s ease-in-out infinite; }
+
+    .tab-spring {
+      animation: springBounce 0.34s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .panel-reveal {
+      animation: panelReveal 0.25s ease-out forwards;
+    }
+
+    /* ==========================================================================
+       無障礙設定：尊重「減少動態效果 (prefers-reduced-motion)」
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* 導覽列高亮 */
+    .nav-pill.active {
+      background-color: var(--yamabuki);
+    }
+
+    /* 自訂繪本風格勾選框 */
+    .ehon-check {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+      border: 3px solid var(--ink);
+      border-radius: 8px;
+      background-color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .ehon-check:checked {
+      background-color: var(--wakatake);
+    }
+    .ehon-check:checked::after {
+      content: "✓";
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--ink);
+      line-height: 1;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- ==================== 頂端固定選單 ==================== -->
+  <header class="sticky top-0 z-40 bg-washi border-b-[3px] border-ink px-3 py-2.5">
+    <nav class="max-w-2xl mx-auto flex items-center justify-between gap-1.5 overflow-x-auto no-scrollbar" aria-label="主導覽選單">
+      <div class="flex items-center gap-1.5">
+        <a href="#sec-flight" data-nav="sec-flight" class="nav-pill ehon-btn bg-white px-3 py-1.5 text-xs sm:text-sm whitespace-nowrap">航班</a>
+        <a href="#sec-itinerary" data-nav="sec-itinerary" class="nav-pill active ehon-btn bg-white px-3 py-1.5 text-xs sm:text-sm whitespace-nowrap">行程</a>
+        <a href="#sec-hotel" data-nav="sec-hotel" class="nav-pill ehon-btn bg-white px-3 py-1.5 text-xs sm:text-sm whitespace-nowrap">住宿</a>
+        <a href="#sec-checklist" data-nav="sec-checklist" class="nav-pill ehon-btn bg-white px-3 py-1.5 text-xs sm:text-sm whitespace-nowrap">清單</a>
+      </div>
+      <!-- 旅伴同步按鈕 -->
+      <button type="button" id="btn-open-sync" class="ehon-btn bg-coral px-3 py-1.5 text-xs sm:text-sm whitespace-nowrap shrink-0">
+        📤 旅伴同步
+      </button>
+    </nav>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-4 pt-5 space-y-8">
+
+    <!-- ==================== 1. 首頁插圖 + 標題 + 出發倒數 ==================== -->
+    <section id="sec-hero" class="ehon-card p-5 space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <span class="bg-wakatake border-[2.5px] border-ink rounded-full px-3 py-0.5 text-xs">
+          兩大一小 (1Y7M) 親子自駕
+        </span>
+        <button type="button" id="btn-open-pwa" class="ehon-btn bg-white px-3 py-0.5 text-xs">
+          📲 加到手機桌面
+        </button>
+      </div>
+
+      <div>
+        <h1 class="text-2xl sm:text-3xl leading-snug">
+          2026 山陽親子賞楓自駕遊 🍁
+        </h1>
+        <p class="text-sm opacity-85 mt-1">
+          11/20 – 11/27｜倉敷・廣島・宮島・尾道 8天7夜
+        </p>
+      </div>
+
+      <!-- 手繪日系繪本風主題插圖 (倉敷白壁柳樹 + 嚴島鳥居 + 紅葉 + 白色 Serena + 兔子) -->
+      <div class="bg-mizu border-[3px] border-ink rounded-[20px] p-2.5 overflow-hidden">
+        <svg viewBox="0 0 440 190" class="w-full h-auto block" role="img" aria-label="山陽親子賞楓自駕繪本插圖">
+          <!-- 天空雲朵 -->
+          <g class="anim-float">
+            <path d="M36 38 C36 29, 49 27, 54 34 C60 26, 75 28, 76 37 C84 38, 85 49, 76 50 L37 50 C29 50, 28 39, 36 38 Z" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          </g>
+          <g class="anim-float" style="animation-delay: 1.4s;">
+            <path d="M335 30 C335 22, 346 21, 350 27 C355 20, 368 22, 369 30 C376 31, 376 40, 368 41 L336 41 C329 41, 328 31, 335 30 Z" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          </g>
+
+          <!-- 遠山 (若竹綠平塗) -->
+          <path d="M0 140 Q95 82 195 140 Z" fill="#B9DAA5" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M240 140 Q345 78 440 140 Z" fill="#B9DAA5" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+
+          <!-- 左側：倉敷美觀地區白壁土藏倉庫 + 垂柳 -->
+          <g transform="translate(14, 66)">
+            <!-- 倉庫白牆 -->
+            <rect x="8" y="24" width="66" height="50" rx="4" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+            <!-- 瓦片屋頂 -->
+            <path d="M2 26 L41 6 L80 26 Z" fill="#3E3A39" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+            <!-- 海參壁格紋 -->
+            <rect x="16" y="46" width="50" height="24" fill="#FFFFFF" stroke="#3E3A39" stroke-width="2.5"/>
+            <line x1="16" y1="58" x2="66" y2="58" stroke="#3E3A39" stroke-width="2.5"/>
+            <line x1="33" y1="46" x2="33" y2="70" stroke="#3E3A39" stroke-width="2.5"/>
+            <line x1="50" y1="46" x2="50" y2="70" stroke="#3E3A39" stroke-width="2.5"/>
+            <!-- 倉敷垂柳枝條 (若竹綠) -->
+            <g class="anim-willow" transform="translate(76, 12)">
+              <path d="M0 62 L0 10" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+              <path d="M0 10 Q-12 24 -10 44" fill="none" stroke="#B9DAA5" stroke-width="5" stroke-linecap="round"/>
+              <path d="M0 10 Q-12 24 -10 44" fill="none" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M0 10 Q12 24 10 46" fill="none" stroke="#B9DAA5" stroke-width="5" stroke-linecap="round"/>
+              <path d="M0 10 Q12 24 10 46" fill="none" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round"/>
+            </g>
+          </g>
+
+          <!-- 中後景：宮島嚴島神社海上大鳥居 (珊瑚粉平塗) -->
+          <g transform="translate(116, 52)">
+            <rect x="20" y="18" width="9" height="70" rx="3" fill="#F2A497" stroke="#3E3A39" stroke-width="3"/>
+            <rect x="65" y="18" width="9" height="70" rx="3" fill="#F2A497" stroke="#3E3A39" stroke-width="3"/>
+            <rect x="10" y="34" width="74" height="8" rx="4" fill="#F2A497" stroke="#3E3A39" stroke-width="3"/>
+            <path d="M4 14 Q47 22 90 14 L87 23 Q47 29 7 23 Z" fill="#F2A497" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+            <rect x="42" y="21" width="10" height="14" rx="2" fill="#F6D27A" stroke="#3E3A39" stroke-width="2.5"/>
+          </g>
+
+          <!-- 飄落的秋日楓葉 (珊瑚粉 & 山吹黃) -->
+          <g class="anim-leaf" transform="translate(226, 42)">
+            <path d="M12 0 L15 9 L24 7 L18 14 L24 21 L15 19 L12 28 L9 19 L0 21 L6 14 L0 7 L9 9 Z" fill="#F2A497" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+          </g>
+          <g class="anim-leaf" style="animation-delay: 1.1s;" transform="translate(284, 54)">
+            <path d="M10 0 L13 8 L21 6 L16 12 L21 18 L13 16 L10 24 L7 16 L-1 18 L4 12 L-1 6 L7 8 Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+          </g>
+
+          <!-- 地面道路 (和紙白底) -->
+          <rect x="0" y="140" width="440" height="50" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+          <line x1="20" y1="165" x2="56" y2="165" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+          <line x1="92" y1="165" x2="128" y2="165" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+          <line x1="312" y1="165" x2="348" y2="165" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+          <line x1="382" y1="165" x2="418" y2="165" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+
+          <!-- 前景主角：白色 Nissan Serena e-POWER 休旅車 -->
+          <g class="anim-car" transform="translate(174, 86)">
+            <path d="M14 22 Q16 8 34 8 L96 8 Q110 8 116 24 L126 28 Q132 30 132 38 L132 48 Q132 53 125 53 L12 53 Q6 53 6 46 L6 32 Q6 24 14 22 Z" fill="#FFFFFF" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+            <!-- 山吹黃車身飾條 -->
+            <rect x="10" y="36" width="116" height="6" rx="3" fill="#F6D27A"/>
+            <!-- 車窗 -->
+            <rect x="24" y="15" width="24" height="16" rx="4" fill="#A8D3E6" stroke="#3E3A39" stroke-width="2.5"/>
+            <rect x="54" y="15" width="24" height="16" rx="4" fill="#A8D3E6" stroke="#3E3A39" stroke-width="2.5"/>
+            <path d="M84 15 L100 15 Q105 15 108 23 L110 31 L84 31 Z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+            <!-- 車燈 -->
+            <rect x="123" y="34" width="6" height="8" rx="2" fill="#F2A497" stroke="#3E3A39" stroke-width="2"/>
+            <!-- 車輪 -->
+            <circle cx="34" cy="54" r="11" fill="#3E3A39"/>
+            <circle cx="34" cy="54" r="5" fill="#FFFCF6"/>
+            <circle cx="104" cy="54" r="11" fill="#3E3A39"/>
+            <circle cx="104" cy="54" r="5" fill="#FFFCF6"/>
+          </g>
+
+          <!-- 右側：大久野島可愛兔子 -->
+          <g class="anim-rabbit" transform="translate(352, 92)">
+            <ellipse cx="14" cy="14" rx="5" ry="13" transform="rotate(-10 14 14)" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+            <ellipse cx="26" cy="14" rx="5" ry="13" transform="rotate(10 26 14)" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+            <ellipse cx="14" cy="15" rx="2" ry="7" transform="rotate(-10 14 15)" fill="#F2A497"/>
+            <ellipse cx="26" cy="15" rx="2" ry="7" transform="rotate(10 26 15)" fill="#F2A497"/>
+            <circle cx="20" cy="34" r="14" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+            <circle cx="15" cy="32" r="2" fill="#3E3A39"/>
+            <circle cx="25" cy="32" r="2" fill="#3E3A39"/>
+            <circle cx="11.5" cy="36" r="2.5" fill="#F2A497"/>
+            <circle cx="28.5" cy="36" r="2.5" fill="#F2A497"/>
+            <path d="M18 36 Q20 38 22 36" fill="none" stroke="#3E3A39" stroke-width="2" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- 出發倒數計時器 (目標：2026-11-20 07:00 台灣時間) -->
+      <div class="bg-yamabuki border-[3px] border-ink rounded-[18px] p-3.5 text-center">
+        <div id="countdown-label" class="text-xs mb-1.5">距離 2026/11/20 07:00 出發還有</div>
+        <div id="countdown-display" class="flex items-center justify-center gap-2.5 text-xl sm:text-2xl">
+          <div class="bg-white border-[2.5px] border-ink rounded-xl px-3.5 py-1 min-w-[68px]">
+            <span id="cd-days">--</span><span class="text-xs ml-0.5">天</span>
+          </div>
+          <div class="bg-white border-[2.5px] border-ink rounded-xl px-3.5 py-1 min-w-[68px]">
+            <span id="cd-hours">--</span><span class="text-xs ml-0.5">小時</span>
+          </div>
+          <div class="bg-white border-[2.5px] border-ink rounded-xl px-3.5 py-1 min-w-[68px]">
+            <span id="cd-mins">--</span><span class="text-xs ml-0.5">分</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 2. 航班與租車卡片 ==================== -->
+    <section id="sec-flight" class="space-y-3">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-mizu border-[3px] border-ink text-sm">✈</span>
+        <h2 class="text-xl">航班與自駕租車</h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+        <!-- 去程卡片 -->
+        <div class="ehon-card p-4 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="bg-mizu border-[2.5px] border-ink rounded-full px-3 py-0.5 text-xs">去程 11/20 (五)</span>
+            <span class="text-xs">中華航空 商務艙</span>
+          </div>
+          <div class="flex items-center justify-between px-1 py-1">
+            <div>
+              <div class="text-xs opacity-75">桃園出發</div>
+              <div class="text-xl">TPE</div>
+            </div>
+            <svg width="64" height="24" viewBox="0 0 64 24" aria-hidden="true">
+              <line x1="2" y1="12" x2="52" y2="12" stroke="#3E3A39" stroke-width="2.5" stroke-dasharray="4 4"/>
+              <path d="M42 5 L58 12 L42 19 L46 12 Z" fill="#F2A497" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+            </svg>
+            <div class="text-right">
+              <div class="text-xs opacity-75">10:25 抵達</div>
+              <div class="text-xl">廣島 HIJ</div>
+            </div>
+          </div>
+          <div class="bg-washi border-[2.5px] border-ink rounded-xl p-2.5 text-xs space-y-1">
+            <div>🚗 <strong>取車：</strong>廣島機場取車（Nissan Serena e-POWER）</div>
+            <div>💺 <strong>配備：</strong>ETC 卡、兒童安全座椅</div>
+          </div>
+        </div>
+
+        <!-- 回程卡片 -->
+        <div class="ehon-card p-4 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="bg-coral border-[2.5px] border-ink rounded-full px-3 py-0.5 text-xs">回程 11/27 (五)</span>
+            <span class="text-xs">中華航空 商務艙</span>
+          </div>
+          <div class="flex items-center justify-between px-1 py-1">
+            <div>
+              <div class="text-xs opacity-75">11:25 起飛</div>
+              <div class="text-xl">廣島 HIJ</div>
+            </div>
+            <svg width="64" height="24" viewBox="0 0 64 24" aria-hidden="true">
+              <line x1="2" y1="12" x2="52" y2="12" stroke="#3E3A39" stroke-width="2.5" stroke-dasharray="4 4"/>
+              <path d="M42 5 L58 12 L42 19 L46 12 Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+            </svg>
+            <div class="text-right">
+              <div class="text-xs opacity-75">返抵台灣</div>
+              <div class="text-xl">TPE</div>
+            </div>
+          </div>
+          <div class="bg-washi border-[2.5px] border-ink rounded-xl p-2.5 text-xs space-y-1">
+            <div>⏰ <strong>08:30</strong> 尾道出發 ➔ <strong>09:10</strong> 機場還車點</div>
+            <div>🧳 <strong>09:35</strong> 商務艙優先報到（托運象印烤箱）</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3. 每日行程 (上方日期切換 + 現場編輯模式 + 時間軸) ==================== -->
+    <section id="sec-itinerary" class="space-y-3">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-wakatake border-[3px] border-ink text-sm">🗺</span>
+          <h2 class="text-xl">每日行程</h2>
+        </div>
+
+        <!-- 編輯行程模式切換 & 雨天對調 -->
+        <div class="flex items-center gap-2">
+          <button type="button" id="btn-rain-toggle" class="ehon-btn bg-mizu px-3 py-1.5 text-xs">
+            ☔ 雨天對調
+          </button>
+          <button type="button" id="btn-edit-toggle" class="ehon-btn bg-yamabuki px-3 py-1.5 text-xs">
+            ✏️ <span id="edit-toggle-label">編輯行程模式</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 雨天對調快速面板 -->
+      <div id="rain-panel" class="hidden ehon-card-washi bg-mizu p-3.5 text-xs space-y-2.5">
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <strong>☔ 雨天應變小幫手（廣島段 11/22–11/24）：</strong>
+            <p class="mt-0.5">若氣象預報降雨機率 ≥ 50%，可一鍵將「Day 4 ALPARK＋LECT 室內購物日」與下雨那天的戶外行程對調！</p>
+          </div>
+          <button type="button" id="btn-rain-close" class="ehon-btn bg-white px-2 py-0.5 text-xs">✕</button>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" onclick="swapDays(2, 3)" class="ehon-btn bg-white px-3 py-1.5 text-xs">
+            🔄 Day 3 (廣島市區) ↔ Day 4 (購物日)
+          </button>
+          <button type="button" onclick="swapDays(3, 4)" class="ehon-btn bg-white px-3 py-1.5 text-xs">
+            🔄 Day 4 (購物日) ↔ Day 5 (宮島/美術館)
+          </button>
+        </div>
+      </div>
+
+      <!-- 上方：可橫向滑動的日期頁籤 (Day 1 ~ Day 8) -->
+      <div id="day-tabs" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 px-0.5" role="tablist" aria-label="行程日期選擇">
+        <!-- JS 動態生成 -->
+      </div>
+
+      <!-- 下方：選定日期的垂直時間軸與備案筆記 -->
+      <div id="itinerary-card" class="ehon-card p-4 sm:p-5">
+        <!-- JS 動態渲染 -->
+      </div>
+    </section>
+
+    <!-- ==================== 4. 住宿資訊卡片 ==================== -->
+    <section id="sec-hotel" class="space-y-3">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-coral border-[3px] border-ink text-sm">🏠</span>
+        <h2 class="text-xl">住宿資訊</h2>
+      </div>
+
+      <div class="space-y-3">
+        <!-- Night 1-2 -->
+        <div class="ehon-card p-4 space-y-1.5">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="bg-yamabuki border-[2.5px] border-ink rounded-full px-3 py-0.5 text-xs">Night 1–2｜11/20 – 11/22</span>
+            <span class="bg-wakatake border-[2px] border-ink rounded-full px-2.5 py-0.5 text-xs">推車友善</span>
+          </div>
+          <h3 class="text-lg">倉敷皇家藝術酒店 (Kurashiki Royal Art Hotel)</h3>
+          <p class="text-xs leading-relaxed">
+            📍 40㎡ 寬敞大空間，步行即達倉敷美觀地區，嬰兒車可直接推進房，晚上散步看運河點燈超輕鬆。
+          </p>
+        </div>
+
+        <!-- Night 3-5 -->
+        <div class="ehon-card p-4 space-y-1.5">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="bg-mizu border-[2.5px] border-ink rounded-full px-3 py-0.5 text-xs">Night 3–5｜11/22 – 11/25</span>
+            <span class="bg-wakatake border-[2px] border-ink rounded-full px-2.5 py-0.5 text-xs">公寓式大空間</span>
+          </div>
+          <h3 class="text-lg">FAV HOTEL Hiroshima Stadium</h3>
+          <p class="text-xs leading-relaxed">
+            📍 廣島自駕據點，公寓式大空間配有簡易流理台與洗衣機，最適合整理 Day 4 在 ALPARK/LECT 採買的戰利品與家電。
+          </p>
+        </div>
+
+        <!-- Night 6-7 -->
+        <div class="ehon-card p-4 bg-washi space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="bg-coral border-[2.5px] border-ink rounded-full px-3 py-0.5 text-xs">Night 6–7｜11/25 – 11/27</span>
+            <span class="bg-yamabuki border-[2px] border-ink rounded-full px-2.5 py-0.5 text-xs">⚠️ 無電梯・禁推車入房</span>
+          </div>
+          <h3 class="text-lg">マングタックリゾート尾道 (Mangtack Resort Onomichi)</h3>
+          <div class="bg-white border-[2.5px] border-ink rounded-2xl p-3 text-xs space-y-1.5 leading-relaxed">
+            <div>⚠️ <strong>重要提醒：</strong>無電梯、館內禁穿鞋、嬰兒車禁入客房、前台 21:00 後無人值守（<strong>務必 16:00–21:00 完成入住</strong>）。</div>
+            <div>🧳 <strong>車內收納對策：</strong>大件行李箱與象印 EVERINO 烤箱全鎖在 Serena 車上，僅拎一個輕便過夜包上樓！</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 5. 可打勾清單 (待辦 / 出發前 / 行李) ==================== -->
+    <section id="sec-checklist" class="space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-yamabuki border-[3px] border-ink text-sm">✓</span>
+          <h2 class="text-xl">行前與行李清單</h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <span id="checklist-progress" class="bg-wakatake border-[2.5px] border-ink rounded-full px-3 py-1 text-xs">
+            0 / 0 完成
+          </span>
+          <button type="button" id="btn-reset-checks" class="ehon-btn bg-white px-2.5 py-1 text-xs" title="清除所有打勾狀態">
+            ↺ 重設打勾
+          </button>
+        </div>
+      </div>
+
+      <div id="checklists-container" class="space-y-4">
+        <!-- JS 動態生成三大清單 -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== 彈窗 1：編輯 / 新增行程項目 ==================== -->
+  <div id="modal-item" class="hidden fixed inset-0 z-50 bg-black/40 flex items-end sm:items-center justify-center p-3" role="dialog" aria-modal="true" aria-labelledby="modal-item-title">
+    <div class="ehon-card bg-washi w-full max-w-md p-5 space-y-3.5">
+      <div class="flex items-center justify-between">
+        <h3 id="modal-item-title" class="text-lg">編輯行程項目</h3>
+        <button type="button" onclick="closeModal('modal-item')" class="ehon-btn bg-white w-8 h-8 flex items-center justify-center text-sm">✕</button>
+      </div>
+
+      <form id="form-item" class="space-y-3 text-sm">
+        <input type="hidden" id="edit-day-idx" />
+        <input type="hidden" id="edit-item-idx" />
+
+        <div class="grid grid-cols-2 gap-2.5">
+          <div>
+            <label class="block text-xs mb-1" for="edit-time">時間 / 時段</label>
+            <input type="text" id="edit-time" placeholder="例：10:25 或 上午" class="w-full bg-white border-[2.5px] border-ink rounded-xl px-3 py-2 text-sm focus:outline-none" required />
+          </div>
+          <div>
+            <label class="block text-xs mb-1" for="edit-transport">交通標籤</label>
+            <select id="edit-transport" class="w-full bg-white border-[2.5px] border-ink rounded-xl px-3 py-2 text-sm focus:outline-none">
+              <option value="自駕">🚗 自駕</option>
+              <option value="步行">👟 步行</option>
+              <option value="渡輪">⛴ 渡輪</option>
+              <option value="纜車">🚡 纜車</option>
+              <option value="電車">🚃 電車</option>
+              <option value="飛機">✈ 飛機</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs mb-1" for="edit-title">地點 / 活動名稱</label>
+          <input type="text" id="edit-title" placeholder="輸入景點、餐廳或採買地點" class="w-full bg-white border-[2.5px] border-ink rounded-xl px-3 py-2 text-sm focus:outline-none" required />
+        </div>
+
+        <div>
+          <label class="block text-xs mb-1" for="edit-note">實用備註（美食、伴手禮、推車與保暖提醒）</label>
+          <textarea id="edit-note" rows="3" placeholder="輸入詳細筆記..." class="w-full bg-white border-[2.5px] border-ink rounded-xl px-3 py-2 text-sm focus:outline-none"></textarea>
+        </div>
+
+        <label class="flex items-center gap-2 cursor-pointer pt-1">
+          <input type="checkbox" id="edit-mustgo" class="ehon-check" />
+          <span class="text-sm">標記為「★ 必去」重點行程</span>
+        </label>
+
+        <div class="flex items-center justify-end gap-2 pt-2">
+          <button type="button" onclick="closeModal('modal-item')" class="ehon-btn bg-white px-4 py-2 text-xs">取消</button>
+          <button type="submit" class="ehon-btn bg-wakatake px-5 py-2 text-xs">儲存行程</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== 彈窗 2：旅伴同步分享工具 (LINE 代碼互傳) ==================== -->
+  <div id="modal-sync" class="hidden fixed inset-0 z-50 bg-black/40 flex items-end sm:items-center justify-center p-3" role="dialog" aria-modal="true" aria-labelledby="modal-sync-title">
+    <div class="ehon-card bg-washi w-full max-w-md p-5 space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between">
+        <h3 id="modal-sync-title" class="text-lg">📤 旅伴同步分享工具</h3>
+        <button type="button" onclick="closeModal('modal-sync')" class="ehon-btn bg-white w-8 h-8 flex items-center justify-center text-sm">✕</button>
+      </div>
+
+      <!-- 區塊 A：匯出分享給旅伴 -->
+      <div class="bg-white border-[2.5px] border-ink rounded-2xl p-3.5 space-y-2.5">
+        <div class="text-xs leading-relaxed">
+          <strong>1️⃣ 分享我的最新行程給旅伴：</strong>
+          <p class="opacity-80 mt-0.5">點擊下方按鈕複製同步代碼，直接貼到 LINE 群組傳給另一半！</p>
+        </div>
+        <textarea id="sync-export-box" readonly rows="2" class="w-full bg-washi border-[2px] border-ink rounded-xl p-2 text-[11px] font-mono focus:outline-none"></textarea>
+        <button type="button" id="btn-copy-sync" class="ehon-btn bg-yamabuki w-full py-2 text-xs">
+          📋 一鍵複製代碼傳到 LINE
+        </button>
+      </div>
+
+      <!-- 區塊 B：貼上旅伴代碼並更新 -->
+      <div class="bg-white border-[2.5px] border-ink rounded-2xl p-3.5 space-y-2.5">
+        <div class="text-xs leading-relaxed">
+          <strong>2️⃣ 接收旅伴傳來的行程代碼：</strong>
+          <p class="opacity-80 mt-0.5">把 LINE 收到的同步代碼貼在下方，即可立刻同步最新行程與清單打勾狀態！</p>
+        </div>
+        <textarea id="sync-import-box" rows="2" placeholder="在此貼上旅伴傳來的代碼..." class="w-full bg-washi border-[2px] border-ink rounded-xl p-2 text-[11px] font-mono focus:outline-none"></textarea>
+        <button type="button" id="btn-apply-sync" class="ehon-btn bg-wakatake w-full py-2 text-xs">
+          📥 套用同步行程
+        </button>
+      </div>
+
+      <!-- 安全重置 -->
+      <div class="flex items-center justify-between pt-1 border-t-2 border-dashed border-ink/30 text-xs">
+        <span class="opacity-75">改亂了嗎？可隨時還原初始版本</span>
+        <button type="button" id="btn-reset-default" class="ehon-btn bg-coral px-3 py-1 text-xs">
+          ↺ 重置為預設行程
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 彈窗 3：PWA 加到主畫面教學 ==================== -->
+  <div id="modal-pwa" class="hidden fixed inset-0 z-50 bg-black/40 flex items-end sm:items-center justify-center p-3" role="dialog" aria-modal="true" aria-labelledby="modal-pwa-title">
+    <div class="ehon-card bg-washi w-full max-w-md p-5 space-y-3.5">
+      <div class="flex items-center justify-between">
+        <h3 id="modal-pwa-title" class="text-lg">📲 加入 iPhone 主畫面 (離線可用)</h3>
+        <button type="button" onclick="closeModal('modal-pwa')" class="ehon-btn bg-white w-8 h-8 flex items-center justify-center text-sm">✕</button>
+      </div>
+      <div class="bg-white border-[2.5px] border-ink rounded-2xl p-3.5 text-xs space-y-2.5 leading-relaxed">
+        <p>把這個繪本小冊加到手機桌面，在日本自駕沒訊號時也能像 App 一樣秒開查看與編輯！</p>
+        <div class="space-y-1.5">
+          <div><strong>步驟 1：</strong>使用 <strong>Safari 瀏覽器</strong> 開啟本網頁。</div>
+          <div><strong>步驟 2：</strong>點擊螢幕最下方正中央的 <strong>「分享」按鈕（方框向上箭頭 ⬆️）</strong>。</div>
+          <div><strong>步驟 3：</strong>往下滑找到並點選 <strong>「加入主畫面」</strong>，右上角按「新增」就完成囉！</div>
+        </div>
+      </div>
+      <button type="button" onclick="closeModal('modal-pwa')" class="ehon-btn bg-yamabuki w-full py-2 text-xs">
+        我知道了！
+      </button>
+    </div>
+  </div>
+
+  <!-- 輕量提示氣泡 (取代 alert) -->
+  <div id="toast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-ink text-white border-[3px] border-ink rounded-full px-4 py-2 text-xs shadow-md whitespace-nowrap"></div>
+
+  <script>
+    /* ==========================================================================
+       1. 完整 8 天預設行程資料 (精準對齊所有地點、美食、雨天備案與時間節點)
+       ========================================================================== */
+    const DEFAULT_ITINERARY = [
+      {
+        day: 1,
+        date: "11/20",
+        weekday: "五",
+        title: "抵達廣島 ➔ 倉敷美觀夜散策",
+        hotel: "倉敷皇家藝術酒店",
+        backupNote: "若晚間才補貨改去「西松屋 コムプラザ倉敷店」(營業至20:00) 或 Ario倉敷／三井Outlet。",
+        items: [
+          {
+            time: "10:25",
+            title: "抵達廣島機場 ➔ 取車出發",
+            transport: "飛機",
+            mustGo: false,
+            note: "入境後領取 Nissan Serena e-POWER（確認兒童安全座椅與 ETC 卡），沿山陽自動車道開往倉敷（約 1 小時 15 分）。"
+          },
+          {
+            time: "下午",
+            title: "西松屋 倉敷平田店",
+            transport: "自駕",
+            mustGo: true,
+            note: "下倉敷 IC 順路補齊尿布、濕紙巾、寶寶副食品與零食（營業至 18:00）。"
+          },
+          {
+            time: "15:30",
+            title: "倉敷皇家藝術酒店 Check-in",
+            transport: "自駕",
+            mustGo: false,
+            note: "40㎡ 寬敞客房，推車可直接推進房，先卸下行李與休息。"
+          },
+          {
+            time: "傍晚",
+            title: "倉敷美觀地區夜散策＆晚餐",
+            transport: "步行",
+            mustGo: true,
+            note: "推車友善運河街景！必吃「倉敷桃子」水果聖代、「ぶっかけ亭本舗 ふるいち」淋汁烏龍麵。"
+          }
+        ]
+      },
+      {
+        day: 2,
+        date: "11/21",
+        weekday: "六",
+        title: "岡山後樂園賞楓 ＆ 倉敷慢遊",
+        hotel: "倉敷皇家藝術酒店",
+        backupNote: "Marine Liner 海上列車（岡山往返高松／坂出看瀨戶大橋海景）。",
+        items: [
+          {
+            time: "上午",
+            title: "岡山後樂園",
+            transport: "自駕",
+            mustGo: true,
+            note: "日本三大名園賞楓！白天陽光溫暖，大片草皮最適合讓寶寶下來走走放風。"
+          },
+          {
+            time: "中午",
+            title: "岡山城 ＆ 午餐",
+            transport: "步行",
+            mustGo: false,
+            note: "過月見橋即達岡山城。推薦「味司 野村」岡山名物多蜜醬豬排丼。"
+          },
+          {
+            time: "下午",
+            title: "倉敷美觀地區慢遊",
+            transport: "自駕",
+            mustGo: false,
+            note: "體驗倉敷川觀光舟、吃金賞可樂餅；伴手禮買橘香堂「むらすずめ」、廣榮堂吉備糰子。"
+          },
+          {
+            time: "夜間",
+            title: "岡山後樂園「幻想庭園」夜間點燈",
+            transport: "自駕",
+            mustGo: true,
+            note: "秋季限定夜楓燈光秀！夜間氣溫約 8°C，務必幫寶寶加上防風保暖外套。"
+          }
+        ]
+      },
+      {
+        day: 3,
+        date: "11/22",
+        weekday: "日",
+        title: "倉敷 ➔ 廣島古蹟與縮景園夜楓",
+        hotel: "FAV HOTEL Hiroshima Stadium",
+        backupNote: "若遇雨天可與 Day 4 ALPARK／LECT 室內購物日整天對調。",
+        items: [
+          {
+            time: "上午",
+            title: "廣島城 ＆ 入住 FAV HOTEL",
+            transport: "自駕",
+            mustGo: false,
+            note: "倉敷出發約 1.5 小時抵廣島。欣賞廣島城護城河銀杏與紅葉秋景。"
+          },
+          {
+            time: "下午",
+            title: "和平紀念公園",
+            transport: "步行",
+            mustGo: false,
+            note: "綠地寬廣平緩、推車完全無障礙，悠閒散步。"
+          },
+          {
+            time: "傍晚",
+            title: "縮景園夜間楓葉點燈",
+            transport: "自駕",
+            mustGo: true,
+            note: "秋季夜楓倒映水池超浪漫！夜間約 8°C 幫寶寶加防風外套。"
+          },
+          {
+            time: "晚餐",
+            title: "廣島燒晚餐（電光石火）",
+            transport: "步行",
+            mustGo: false,
+            note: "招牌蛋包造型廣島燒，方便分切麵條與高麗菜給寶寶吃。"
+          }
+        ]
+      },
+      {
+        day: 4,
+        date: "11/23",
+        weekday: "一",
+        title: "廣島最強購物日：ALPARK ＋ LECT",
+        hotel: "FAV HOTEL Hiroshima Stadium",
+        backupNote: "EDION 廣島本店（若家電缺貨補買）、阿卡將 ゆめタウンみゆき店。",
+        items: [
+          {
+            time: "上午",
+            title: "ALPARK 東棟採買",
+            transport: "自駕",
+            mustGo: true,
+            note: "2F：mont-bell 羽絨衣、UNIQLO｜3F：Seria 日系百元雜貨。"
+          },
+          {
+            time: "中午",
+            title: "ALPARK 西棟採買",
+            transport: "步行",
+            mustGo: true,
+            note: "1–2F：無印良品旗艦店｜2F：Alpen Outdoors (DOD/KEEN)｜3F：山田電機看象印 EVERINO ES-GY26 微波烤箱。"
+          },
+          {
+            time: "下午",
+            title: "LECT 購物中心",
+            transport: "自駕",
+            mustGo: true,
+            note: "2F：3COINS+plus 育兒小物、ABC-MART GS 補貨 KEEN 鞋款，於蔦屋書店 / T-SITE 喝下午茶休息。"
+          }
+        ]
+      },
+      {
+        day: 5,
+        date: "11/24",
+        weekday: "二",
+        title: "宮島海上鳥居 ＆ 下瀨美術館",
+        hotel: "FAV HOTEL Hiroshima Stadium",
+        backupNote: "若遇雨天或海風過強，與 Day 4 購物行程對調。",
+        items: [
+          {
+            time: "上午",
+            title: "宮島・嚴島神社・紅葉谷公園",
+            transport: "渡輪",
+            mustGo: true,
+            note: "開車至宮島口搭渡輪。看海上大鳥居，表參道必吃烤牡蠣、牡蠣炊飯、紅葉堂炸楓葉饅頭；買生楓葉饅頭。"
+          },
+          {
+            time: "下午",
+            title: "下瀨美術館",
+            transport: "自駕",
+            mustGo: true,
+            note: "水上彩色展館超好拍！於「望洋露台」享海景下午茶（海風強請備妥推車防風雨罩）。"
+          },
+          {
+            time: "晚上",
+            title: "返回廣島飯店整理分裝",
+            transport: "自駕",
+            mustGo: false,
+            note: "今晚先把尾道 2 晚衣物裝進「輕便過夜包」，象印烤箱與大行李箱留在車上。"
+          }
+        ]
+      },
+      {
+        day: 6,
+        date: "11/25",
+        weekday: "三",
+        title: "尾道千光寺纜車 ＆ 海邊倉庫咖啡",
+        hotel: "Mangtack Resort Onomichi",
+        backupNote: "雨天改逛 ONOMICHI U2 室內選物或福山 YouMe Town。",
+        items: [
+          {
+            time: "上午",
+            title: "自駕前往尾道＆寄放行李",
+            transport: "自駕",
+            mustGo: false,
+            note: "廣島出發約 1 小時。提醒：飯店 16:00–21:00 前務必完成入住，無電梯且禁推車入房。"
+          },
+          {
+            time: "下午",
+            title: "千光寺纜車",
+            transport: "纜車",
+            mustGo: true,
+            note: "搭纜車登頂俯瞰尾道水道與島波海道，視寶寶體力走平緩步道下山。"
+          },
+          {
+            time: "傍晚",
+            title: "尾道老街＆海岸通甜點",
+            transport: "步行",
+            mustGo: false,
+            note: "必吃東珍康尾道拉麵、Karasawa 雞蛋冰淇淋最中餅、尾道黑貓布丁。"
+          },
+          {
+            time: "晚上",
+            title: "ONOMICHI U2",
+            transport: "步行",
+            mustGo: true,
+            note: "海邊倉庫改建複合空間，咖啡與麵包水準極高，推車全程無障礙。"
+          }
+        ]
+      },
+      {
+        day: 7,
+        date: "11/26",
+        weekday: "四",
+        title: "大久野島兔子島 ＆ 濱海公路兜風",
+        hotel: "Mangtack Resort Onomichi",
+        backupNote: "若下雨改尾道商店街（彩工房帆布）與室內咖啡館慢遊。",
+        items: [
+          {
+            time: "上午",
+            title: "大久野島（兔子島）",
+            transport: "渡輪",
+            mustGo: true,
+            note: "開車至忠海港搭船登島（港口先買兔飼料），親子草地餵兔子，海風強備妥推車防風罩。"
+          },
+          {
+            time: "下午",
+            title: "瀨戶內海濱海公路自駕兜風",
+            transport: "自駕",
+            mustGo: false,
+            note: "沿海岸線悠閒自駕兜風，必買生口島／島波檸檬蛋糕當伴手禮。"
+          }
+        ]
+      },
+      {
+        day: 8,
+        date: "11/27",
+        weekday: "五",
+        title: "廣島機場還車 ＆ 搭機返台",
+        hotel: "溫暖的家",
+        backupNote: "機場內購買廣島生楓葉饅頭、瀬戸内檸檬辣醬（LEMOSCO）最後補貨。",
+        items: [
+          {
+            time: "08:30",
+            title: "尾道飯店退房出發",
+            transport: "自駕",
+            mustGo: false,
+            note: "尾道出發至廣島機場約 30–35 分鐘，途中記得依規定加滿油。"
+          },
+          {
+            time: "09:10",
+            title: "廣島機場還車＋接駁",
+            transport: "自駕",
+            mustGo: false,
+            note: "預留約 25 分鐘檢查車身、結算 ETC 與搭乘免費接駁車前往航廈。"
+          },
+          {
+            time: "09:35",
+            title: "華航商務艙報到＆托運",
+            transport: "飛機",
+            mustGo: false,
+            note: "托運行李（含象印 EVERINO 烤箱貼易碎標籤）與推車機邊托運；免稅隨緣不強求。"
+          },
+          {
+            time: "11:25",
+            title: "班機起飛返台",
+            transport: "飛機",
+            mustGo: false,
+            note: "平安返抵台灣，圓滿結束 8 天山陽親子賞楓之旅！"
+          }
+        ]
+      }
+    ];
+
+    /* ==========================================================================
+       2. 三大預設檢查清單資料
+       ========================================================================== */
+    const DEFAULT_CHECKLISTS = [
+      {
+        id: "todo",
+        title: "出發前待辦清單",
+        color: "bg-coral",
+        items: [
+          { id: "td1", text: "新護照更新華航機票 APIS 資訊", done: false },
+          { id: "td2", text: "更新 Visit Japan Web (VJW) 新護照 QR Code", done: false },
+          { id: "td3", text: "台灣駕照正本＋日文譯本確認", done: false },
+          { id: "td4", text: "傳訊尾道飯店請求 1 樓低樓層客房", done: false },
+          { id: "td5", text: "確認 Nissan Serena 兒童安全座椅預約", done: false }
+        ]
+      },
+      {
+        id: "docs",
+        title: "隨身與重要文件行李清單",
+        color: "bg-mizu",
+        items: [
+          { id: "dc1", text: "新護照（大人＋寶寶）", done: false },
+          { id: "dc2", text: "台灣駕照＋日文譯本", done: false },
+          { id: "dc3", text: "日幣現金＋高回饋信用卡（玉山Unicard/CUBE/FlyGo）", done: false },
+          { id: "dc4", text: "eSIM / 漫遊開通", done: false },
+          { id: "dc5", text: "寶寶健保卡 / 常備藥 / 耳溫槍", done: false }
+        ]
+      },
+      {
+        id: "gear",
+        title: "衣物與親子裝備清單",
+        color: "bg-wakatake",
+        items: [
+          { id: "gr1", text: "洋蔥式保暖衣物（15°C~8°C：發熱衣/長袖＋刷毛背心＋三合一防風羽絨外套）", done: false },
+          { id: "gr2", text: "寶寶防風帽 / 小毯子 / 睡袋", done: false },
+          { id: "gr3", text: "嬰兒推車＋推車雨罩（兼防風）", done: false },
+          { id: "gr4", text: "輕便過夜分裝袋（尾道無電梯專用）", done: false },
+          { id: "gr5", text: "空行李箱 / 摺疊旅行袋（裝戰利品與烤箱）", done: false }
+        ]
+      }
+    ];
+
+    /* ==========================================================================
+       3. 本地儲存與狀態管理
+       ========================================================================== */
+    const STORAGE_KEY = "sanyo_ehon_trip_2026_v2";
+    let appState = loadAppState();
+    let activeDayIdx = 0;
+    let editMode = false;
+
+    function loadAppState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && Array.isArray(parsed.itinerary) && Array.isArray(parsed.checklists)) {
+            return parsed;
+          }
+        }
+      } catch (err) {
+        console.warn("讀取本機儲存失敗，載入預設行程", err);
+      }
+      return {
+        itinerary: JSON.parse(JSON.stringify(DEFAULT_ITINERARY)),
+        checklists: JSON.parse(JSON.stringify(DEFAULT_CHECKLISTS))
+      };
+    }
+
+    function saveAppState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      } catch (err) {
+        console.warn("儲存本機資料失敗", err);
+      }
+    }
+
+    let toastTimer = null;
+    function showToast(text) {
+      const el = document.getElementById("toast");
+      el.textContent = text;
+      el.classList.remove("hidden");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.add("hidden"), 2500);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    /* ==========================================================================
+       4. 出發倒數計時器 (2026-11-20 07:00 台灣時間 UTC+8)
+       ========================================================================== */
+    function updateCountdown() {
+      const startTs = new Date("2026-11-20T07:00:00+08:00").getTime();
+      const endTs = new Date("2026-11-27T23:59:59+08:00").getTime();
+      const now = Date.now();
+
+      const label = document.getElementById("countdown-label");
+      const display = document.getElementById("countdown-display");
+
+      if (now < startTs) {
+        const diff = startTs - now;
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        document.getElementById("cd-days").textContent = String(d).padStart(2, "0");
+        document.getElementById("cd-hours").textContent = String(h).padStart(2, "0");
+        document.getElementById("cd-mins").textContent = String(m).padStart(2, "0");
+      } else if (now <= endTs) {
+        label.textContent = "🍁 2026 山陽親子賞楓自駕遊";
+        display.innerHTML = `<div class="bg-white border-[2.5px] border-ink rounded-xl px-5 py-1.5 text-lg">🎉 旅途進行中！平安順心</div>`;
+      } else {
+        label.textContent = "🍁 2026 山陽親子賞楓自駕遊";
+        display.innerHTML = `<div class="bg-white border-[2.5px] border-ink rounded-xl px-5 py-1.5 text-lg">✨ 圓滿完成・滿滿回憶！</div>`;
+      }
+    }
+
+    /* ==========================================================================
+       5. 每日行程頁籤與時間軸渲染
+       ========================================================================== */
+    function getTransportMeta(type) {
+      const map = {
+        "自駕": { bg: "bg-yamabuki", icon: "🚗" },
+        "步行": { bg: "bg-wakatake", icon: "👟" },
+        "渡輪": { bg: "bg-mizu", icon: "⛴" },
+        "纜車": { bg: "bg-coral", icon: "🚡" },
+        "電車": { bg: "bg-wakatake", icon: "🚃" },
+        "飛機": { bg: "bg-mizu", icon: "✈" }
+      };
+      return map[type] || { bg: "bg-washi", icon: "📍" };
+    }
+
+    function renderDayTabs() {
+      const container = document.getElementById("day-tabs");
+      container.innerHTML = "";
+
+      appState.itinerary.forEach((d, idx) => {
+        const active = idx === activeDayIdx;
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.setAttribute("role", "tab");
+        btn.setAttribute("aria-selected", active ? "true" : "false");
+        btn.className = `ehon-btn px-3.5 py-2 text-left shrink-0 ${
+          active ? "bg-yamabuki tab-spring" : "bg-white"
+        }`;
+        btn.innerHTML = `
+          <div class="text-[11px] opacity-80 leading-none">Day ${d.day}</div>
+          <div class="text-sm mt-0.5 whitespace-nowrap">${escapeHtml(d.date)} (${escapeHtml(d.weekday)})</div>
+        `;
+        btn.addEventListener("click", () => {
+          activeDayIdx = idx;
+          renderDayTabs();
+          renderTimeline();
+          btn.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        });
+        container.appendChild(btn);
+      });
+    }
+
+    function renderTimeline() {
+      const dayObj = appState.itinerary[activeDayIdx];
+      const card = document.getElementById("itinerary-card");
+
+      const itemsHtml = dayObj.items
+        .map((item, idx) => {
+          const meta = getTransportMeta(item.transport);
+          const mustBadge = item.mustGo
+            ? `<span class="inline-block bg-coral border-[2px] border-ink rounded-full px-2.5 py-0.5 text-[11px] leading-none">★ 必去</span>`
+            : "";
+
+          const editBar = editMode
+            ? `<div class="flex items-center gap-1.5 mt-2.5 pt-2 border-t-2 border-dashed border-ink/30">
+                <button type="button" onclick="openItemModal(${activeDayIdx}, ${idx})" class="ehon-btn bg-mizu px-2.5 py-1 text-xs">✏️ 修改</button>
+                <button type="button" onclick="moveItem(${activeDayIdx}, ${idx}, -1)" class="ehon-btn bg-white px-2.5 py-1 text-xs" ${idx === 0 ? "disabled style='opacity:0.4'" : ""} aria-label="上移">▲</button>
+                <button type="button" onclick="moveItem(${activeDayIdx}, ${idx}, 1)" class="ehon-btn bg-white px-2.5 py-1 text-xs" ${idx === dayObj.items.length - 1 ? "disabled style='opacity:0.4'" : ""} aria-label="下移">▼</button>
+                <button type="button" onclick="deleteItem(${activeDayIdx}, ${idx})" class="ehon-btn bg-coral px-2.5 py-1 text-xs ml-auto">🗑 刪除</button>
+              </div>`
+            : "";
+
+          return `
+            <div class="relative pl-6 pb-5 last:pb-1">
+              <!-- 時間軸連接線 -->
+              <div class="absolute left-[9px] top-3 bottom-0 w-[3px] bg-ink last:hidden"></div>
+              <!-- 節點圓點 -->
+              <div class="absolute left-0 top-1.5 w-[21px] h-[21px] rounded-full ${meta.bg} border-[3px] border-ink"></div>
+
+              <div class="bg-washi border-[2.5px] border-ink rounded-2xl p-3.5">
+                <div class="flex flex-wrap items-center gap-1.5 mb-1.5">
+                  <span class="bg-white border-[2px] border-ink rounded-lg px-2 py-0.5 text-xs">${escapeHtml(item.time)}</span>
+                  <span class="${meta.bg} border-[2px] border-ink rounded-full px-2.5 py-0.5 text-xs">${meta.icon} ${escapeHtml(item.transport)}</span>
+                  ${mustBadge}
+                </div>
+                <h4 class="text-base leading-snug">${escapeHtml(item.title)}</h4>
+                ${item.note ? `<p class="text-xs opacity-85 mt-1 leading-relaxed">${escapeHtml(item.note)}</p>` : ""}
+                ${editBar}
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+
+      const addBtnHtml = editMode
+        ? `<div class="my-3 flex justify-center">
+            <button type="button" onclick="openItemModal(${activeDayIdx}, -1)" class="ehon-btn bg-wakatake px-4 py-2 text-xs">
+              ＋ 新增當日行程項目
+            </button>
+          </div>`
+        : "";
+
+      const backupHtml = editMode
+        ? `<div class="mt-4 bg-yamabuki border-[2.5px] border-ink rounded-2xl p-3.5 space-y-2">
+            <label class="block text-xs" for="backup-editor"><strong>☔ 備案筆記（可直接在下方修改）：</strong></label>
+            <textarea id="backup-editor" rows="2" onchange="updateBackupNote(${activeDayIdx}, this.value)" class="w-full bg-white border-[2px] border-ink rounded-xl p-2 text-xs focus:outline-none">${escapeHtml(dayObj.backupNote || "")}</textarea>
+          </div>`
+        : `<div class="mt-4 bg-washi border-[2.5px] border-ink rounded-2xl p-3.5 text-xs leading-relaxed">
+            <span class="inline-block bg-mizu border-[2px] border-ink rounded-full px-2.5 py-0.5 text-[11px] mb-1">💡 備案筆記</span>
+            <p class="mt-0.5">${escapeHtml(dayObj.backupNote || "無特別備案")}</p>
+          </div>`;
+
+      card.innerHTML = `
+        <div class="panel-reveal">
+          <div class="flex flex-wrap items-start justify-between gap-2 pb-3 mb-4 border-b-[3px] border-ink">
+            <div>
+              <div class="text-xs opacity-75">Day ${dayObj.day} ・ ${escapeHtml(dayObj.date)} (週${escapeHtml(dayObj.weekday)})</div>
+              <h3 class="text-lg sm:text-xl mt-0.5">${escapeHtml(dayObj.title)}</h3>
+            </div>
+            <span class="bg-wakatake border-[2px] border-ink rounded-full px-3 py-0.5 text-xs">
+              🏠 ${escapeHtml(dayObj.hotel)}
+            </span>
+          </div>
+
+          <div>
+            ${itemsHtml || `<p class="text-sm text-center py-6 opacity-70">目前沒有行程，請開啟編輯模式新增！</p>`}
+          </div>
+
+          ${addBtnHtml}
+          ${backupHtml}
+        </div>
+      `;
+    }
+
+    /* ==========================================================================
+       6. 手機現場編輯模式 CRUD 與雨天對調
+       ========================================================================== */
+    function swapDays(idxA, idxB) {
+      const a = appState.itinerary[idxA];
+      const b = appState.itinerary[idxB];
+      [a.title, b.title] = [b.title, a.title];
+      [a.items, b.items] = [b.items, a.items];
+      [a.backupNote, b.backupNote] = [b.backupNote, a.backupNote];
+
+      saveAppState();
+      renderDayTabs();
+      renderTimeline();
+      showToast(`已將 Day ${idxA + 1} 與 Day ${idxB + 1} 行程對調！`);
+    }
+
+    function moveItem(dayIdx, itemIdx, delta) {
+      const arr = appState.itinerary[dayIdx].items;
+      const target = itemIdx + delta;
+      if (target < 0 || target >= arr.length) return;
+      const [moved] = arr.splice(itemIdx, 1);
+      arr.splice(target, 0, moved);
+      saveAppState();
+      renderTimeline();
+    }
+
+    function deleteItem(dayIdx, itemIdx) {
+      appState.itinerary[dayIdx].items.splice(itemIdx, 1);
+      saveAppState();
+      renderTimeline();
+      showToast("已刪除該行程項目");
+    }
+
+    function updateBackupNote(dayIdx, val) {
+      appState.itinerary[dayIdx].backupNote = val.trim();
+      saveAppState();
+      showToast("已儲存備案筆記");
+    }
+
+    function openItemModal(dayIdx, itemIdx) {
+      document.getElementById("edit-day-idx").value = dayIdx;
+      document.getElementById("edit-item-idx").value = itemIdx;
+
+      if (itemIdx >= 0) {
+        const item = appState.itinerary[dayIdx].items[itemIdx];
+        document.getElementById("modal-item-title").textContent = `修改 Day ${dayIdx + 1} 行程`;
+        document.getElementById("edit-time").value = item.time;
+        document.getElementById("edit-transport").value = item.transport;
+        document.getElementById("edit-title").value = item.title;
+        document.getElementById("edit-note").value = item.note || "";
+        document.getElementById("edit-mustgo").checked = !!item.mustGo;
+      } else {
+        document.getElementById("modal-item-title").textContent = `新增 Day ${dayIdx + 1} 行程`;
+        document.getElementById("edit-time").value = "下午";
+        document.getElementById("edit-transport").value = "自駕";
+        document.getElementById("edit-title").value = "";
+        document.getElementById("edit-note").value = "";
+        document.getElementById("edit-mustgo").checked = false;
+      }
+      document.getElementById("modal-item").classList.remove("hidden");
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add("hidden");
+    }
+
+    document.getElementById("form-item").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const dayIdx = parseInt(document.getElementById("edit-day-idx").value, 10);
+      const itemIdx = parseInt(document.getElementById("edit-item-idx").value, 10);
+
+      const entry = {
+        time: document.getElementById("edit-time").value.trim(),
+        transport: document.getElementById("edit-transport").value,
+        title: document.getElementById("edit-title").value.trim(),
+        note: document.getElementById("edit-note").value.trim(),
+        mustGo: document.getElementById("edit-mustgo").checked
+      };
+
+      if (itemIdx >= 0) {
+        appState.itinerary[dayIdx].items[itemIdx] = entry;
+        showToast("已更新行程並自動存檔！");
+      } else {
+        appState.itinerary[dayIdx].items.push(entry);
+        showToast("已新增行程並自動存檔！");
+      }
+
+      saveAppState();
+      closeModal("modal-item");
+      renderTimeline();
+    });
+
+    /* ==========================================================================
+       7. 可打勾清單渲染與互動
+       ========================================================================== */
+    function renderChecklists() {
+      const container = document.getElementById("checklists-container");
+      container.innerHTML = "";
+
+      let total = 0;
+      let checked = 0;
+
+      appState.checklists.forEach((group, gIdx) => {
+        total += group.items.length;
+        checked += group.items.filter((i) => i.done).length;
+
+        const card = document.createElement("div");
+        card.className = "ehon-card p-4 space-y-3";
+
+        const rows = group.items
+          .map(
+            (item, iIdx) => `
+            <label class="flex items-start gap-2.5 p-2.5 rounded-2xl bg-washi border-[2px] border-ink cursor-pointer">
+              <input type="checkbox" class="ehon-check mt-0.5" ${item.done ? "checked" : ""} onchange="toggleCheck(${gIdx}, ${iIdx})" />
+              <span class="text-sm leading-snug flex-1 ${item.done ? "line-through opacity-50" : ""}">${escapeHtml(item.text)}</span>
+            </label>
+          `
+          )
+          .join("");
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="${group.color} border-[2.5px] border-ink rounded-full px-3 py-0.5 text-sm">
+              ${escapeHtml(group.title)}
+            </span>
+            <span class="text-xs opacity-75">
+              ${group.items.filter((i) => i.done).length} / ${group.items.length}
+            </span>
+          </div>
+          <div class="space-y-2">${rows}</div>
+          <form onsubmit="addCheckItem(event, ${gIdx})" class="flex items-center gap-2 pt-1">
+            <input type="text" id="add-chk-${gIdx}" placeholder="新增清單項目..." class="flex-1 bg-washi border-[2px] border-ink rounded-full px-3 py-1.5 text-xs focus:outline-none" />
+            <button type="submit" class="ehon-btn bg-yamabuki px-3 py-1.5 text-xs shrink-0">＋ 新增</button>
+          </form>
+        `;
+        container.appendChild(card);
+      });
+
+      document.getElementById("checklist-progress").textContent = `${checked} / ${total} 完成`;
+    }
+
+    function toggleCheck(gIdx, iIdx) {
+      appState.checklists[gIdx].items[iIdx].done = !appState.checklists[gIdx].items[iIdx].done;
+      saveAppState();
+      renderChecklists();
+    }
+
+    function addCheckItem(e, gIdx) {
+      e.preventDefault();
+      const input = document.getElementById(`add-chk-${gIdx}`);
+      const text = input.value.trim();
+      if (!text) return;
+      appState.checklists[gIdx].items.push({
+        id: "chk_" + Date.now(),
+        text,
+        done: false
+      });
+      saveAppState();
+      renderChecklists();
+      showToast("已加入清單！");
+    }
+
+    /* ==========================================================================
+       8. 旅伴同步分享工具 (UTF-8 安全 Base64 編碼/解碼)
+       ========================================================================== */
+    function encodeSyncCode(obj) {
+      const jsonStr = JSON.stringify(obj);
+      const bytes = new TextEncoder().encode(jsonStr);
+      let bin = "";
+      bytes.forEach((b) => (bin += String.fromCharCode(b)));
+      return "SANYO2026:" + btoa(bin);
+    }
+
+    function decodeSyncCode(code) {
+      const clean = code.trim().replace(/^SANYO2026:/, "");
+      const bin = atob(clean);
+      const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) {
+        bytes[i] = bin.charCodeAt(i);
+      }
+      const jsonStr = new TextDecoder().decode(bytes);
+      return JSON.parse(jsonStr);
+    }
+
+    /* ==========================================================================
+       9. 初始化與所有事件綁定
+       ========================================================================== */
+    window.addEventListener("DOMContentLoaded", () => {
+      updateCountdown();
+      setInterval(updateCountdown, 30000);
+
+      renderDayTabs();
+      renderTimeline();
+      renderChecklists();
+
+      // 編輯模式切換
+      document.getElementById("btn-edit-toggle").addEventListener("click", () => {
+        editMode = !editMode;
+        const btn = document.getElementById("btn-edit-toggle");
+        const label = document.getElementById("edit-toggle-label");
+        if (editMode) {
+          btn.classList.remove("bg-yamabuki");
+          btn.classList.add("bg-wakatake");
+          label.textContent = "完成編輯";
+          showToast("已開啟編輯模式，可隨時修改或排序");
+        } else {
+          btn.classList.remove("bg-wakatake");
+          btn.classList.add("bg-yamabuki");
+          label.textContent = "編輯行程模式";
+        }
+        renderTimeline();
+      });
+
+      // 雨天對調面板
+      const rainPanel = document.getElementById("rain-panel");
+      document.getElementById("btn-rain-toggle").addEventListener("click", () => {
+        rainPanel.classList.toggle("hidden");
+      });
+      document.getElementById("btn-rain-close").addEventListener("click", () => {
+        rainPanel.classList.add("hidden");
+      });
+
+      // PWA 教學彈窗
+      document.getElementById("btn-open-pwa").addEventListener("click", () => {
+        document.getElementById("modal-pwa").classList.remove("hidden");
+      });
+
+      // 旅伴同步彈窗開啟
+      document.getElementById("btn-open-sync").addEventListener("click", () => {
+        document.getElementById("sync-export-box").value = encodeSyncCode(appState);
+        document.getElementById("sync-import-box").value = "";
+        document.getElementById("modal-sync").classList.remove("hidden");
+      });
+
+      // 一鍵複製代碼 (相容 iOS Safari 與 iframe 環境)
+      document.getElementById("btn-copy-sync").addEventListener("click", () => {
+        const box = document.getElementById("sync-export-box");
+        box.select();
+        box.setSelectionRange(0, 99999);
+        try {
+          document.execCommand("copy");
+          showToast("✅ 已複製代碼！快去 LINE 貼上傳給旅伴吧");
+        } catch (err) {
+          showToast("請長按上方代碼框全選複製");
+        }
+      });
+
+      // 套用旅伴代碼
+      document.getElementById("btn-apply-sync").addEventListener("click", () => {
+        const raw = document.getElementById("sync-import-box").value;
+        if (!raw.trim()) {
+          showToast("⚠️ 請先貼上旅伴傳來的同步代碼");
+          return;
+        }
+        try {
+          const imported = decodeSyncCode(raw);
+          if (!imported || !Array.isArray(imported.itinerary) || !Array.isArray(imported.checklists)) {
+            throw new Error("格式不符");
+          }
+          appState = imported;
+          saveAppState();
+          renderDayTabs();
+          renderTimeline();
+          renderChecklists();
+          closeModal("modal-sync");
+          showToast("🎉 成功同步旅伴的最新行程與清單！");
+        } catch (err) {
+          showToast("❌ 代碼格式不正確，請確認有完整複製");
+        }
+      });
+
+      // 重置為預設行程
+      document.getElementById("btn-reset-default").addEventListener("click", () => {
+        appState = {
+          itinerary: JSON.parse(JSON.stringify(DEFAULT_ITINERARY)),
+          checklists: JSON.parse(JSON.stringify(DEFAULT_CHECKLISTS))
+        };
+        saveAppState();
+        renderDayTabs();
+        renderTimeline();
+        renderChecklists();
+        closeModal("modal-sync");
+        showToast("↺ 已重置為預設 8 天行程與清單");
+      });
+
+      // 重設清單打勾
+      document.getElementById("btn-reset-checks").addEventListener("click", () => {
+        appState.checklists.forEach((g) => g.items.forEach((i) => (i.done = false)));
+        saveAppState();
+        renderChecklists();
+        showToast("已清除所有打勾狀態");
+      });
+
+      // 頂端導覽列滾動高亮
+      const navLinks = document.querySelectorAll(".nav-pill");
+      const secIds = ["sec-flight", "sec-itinerary", "sec-hotel", "sec-checklist"];
+      window.addEventListener("scroll", () => {
+        const pos = window.scrollY + 115;
+        let current = "sec-itinerary";
+        secIds.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el && el.offsetTop <= pos) current = id;
+        });
+        navLinks.forEach((a) => {
+          a.classList.toggle("active", a.dataset.nav === current);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
